@@ -10,8 +10,8 @@ import javax.ws.rs.Produces;
 public class REST {
 
 	
-	public void REST(){}
-	
+	public void REST(){}//xygxygx
+	//vbxgg
 	@GET
     @Produces("text/xml")
 	public Object get(){
