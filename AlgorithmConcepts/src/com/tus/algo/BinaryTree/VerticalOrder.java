@@ -18,9 +18,9 @@ import java.util.Queue;
 
  The output of print this tree vertically will be:
  4
- 2
+ 2 8
  1 5 6
- 3 8
+ 3 
  7
  9 
  *

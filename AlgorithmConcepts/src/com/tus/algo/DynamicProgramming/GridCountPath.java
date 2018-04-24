@@ -25,7 +25,7 @@ public class GridCountPath {
 	public static void main(String[] args) {
 		GridCountPath paths = new GridCountPath();
 
-		System.out.println(paths.countPath(5));
+		System.out.println(paths.countPath(3));
 
 	}
 
