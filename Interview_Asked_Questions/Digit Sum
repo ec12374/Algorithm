@@ -1,0 +1,52 @@
+package com.tus.InterviewAskedQuestions;
+
+public class DigitSum {
+
+	public int digitSum(int n) {
+
+		int res = n;
+
+		while ((res / 10) != 0) {
+
+			res = findSum(res);
+
+		}
+
+		return res;
+	}
+
+	private int findSum(int n) {
+
+		int res = 0;
+		int temp = n / 10;
+		int rem = n % 10;
+		while (temp != 0 || rem != 0) {
+
+			res = res + rem;
+			rem = temp % 10;
+			temp = temp / 10;
+
+		}
+
+		return res;
+	}
+
+	// O(1)
+	public int digSum(int n) {
+		if (n == 0)
+			return 0;
+		return (n % 9 == 0) ? 9 : (n % 9);
+	}
+
+	public static void main(String[] args) {
+
+		int n = 5;
+		System.out.println((345 / 10));
+		System.out.println((13978 % 9));
+
+		DigitSum dsm = new DigitSum();
+		System.out.println("Single didgit sum is " + dsm.digitSum(38));
+
+	}
+
+}
