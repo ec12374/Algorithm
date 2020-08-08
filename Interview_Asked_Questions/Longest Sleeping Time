@@ -1,0 +1,131 @@
+package com.tus.InterviewAskedQuestions;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class JamesBusinessMan {
+
+	public static int solution(String S) {
+
+	     //	String[] days = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+
+		//int[] timing = new int[days.length];
+
+		int maxSleepingTime = 0;
+
+		String[] lines = S.split("\\r?\\n");
+
+		ArrayList<Integer> startTiming = new ArrayList<>();
+		ArrayList<Integer> endTiming = new ArrayList<>();
+
+		for (String line : lines) {
+
+			String day = line.substring(0, 3);
+			String start = line.substring(4, 9);
+			String end = line.substring(10, 15);
+
+			String s1 = start.substring(0, 2);
+			String s2 = start.substring(3, 5);
+
+			String s3 = end.substring(0, 2);
+			String s4 = end.substring(3, 5);
+
+			int meetingStart = Integer.parseInt(s1) * 60 + Integer.parseInt(s2);
+			int meetingEnd = Integer.parseInt(s3) * 60 + Integer.parseInt(s4);
+
+			if (day.equalsIgnoreCase("Tue")) {
+
+				meetingStart = meetingStart + 24 * 60;
+				meetingEnd = meetingEnd + 24 * 60;
+
+			}
+
+			else if (day.equalsIgnoreCase("Wed")) {
+				meetingStart = meetingStart + 2 * 24 * 60;
+				meetingEnd = meetingEnd + 2 * 24 * 60;
+			} else if (day.equalsIgnoreCase("Thu")) {
+				meetingStart = meetingStart + 3 * 24 * 60;
+				meetingEnd = meetingEnd + 3 * 24 * 60;
+			} else if (day.equalsIgnoreCase("Fri")) {
+				meetingStart = meetingStart + 4 * 24 * 60;
+				meetingEnd = meetingEnd + 4 * 24 * 60;
+			} else if (day.equalsIgnoreCase("Sat")) {
+				meetingStart = meetingStart + 5 * 24 * 60;
+				meetingEnd = meetingEnd + 5 * 24 * 60;
+			} else if (day.equalsIgnoreCase("Sun")) {
+				meetingStart = meetingStart + 6 * 24 * 60;
+				meetingEnd = meetingEnd + 6 * 24 * 60;
+			}
+
+			startTiming.add(meetingStart);
+			endTiming.add(meetingEnd);
+
+		}
+
+		Collections.sort(startTiming);
+		Collections.sort(endTiming);
+
+		// Object[] startTimings = startTiming.toArray();
+
+		Integer[] startTimings = new Integer[startTiming.size()];
+
+		for (int i = 0; i < startTimings.length; ++i) {
+
+			startTimings[i] = startTiming.get(i);
+
+		}
+
+		Integer[] endTimings = new Integer[endTiming.size()];
+
+		for (int i = 0; i < endTimings.length; ++i) {
+
+			endTimings[i] = endTiming.get(i);
+
+		}
+
+		System.out.println(Arrays.toString(startTimings));
+		System.out.println(Arrays.toString(endTimings));
+		
+		int i = 0;
+		int j = 0;
+
+		maxSleepingTime = startTimings[0] - maxSleepingTime;
+		
+		
+		while (i < startTimings.length-1) {
+
+			int diff = startTimings[i + 1] - endTimings[j];
+
+			maxSleepingTime = Math.max(maxSleepingTime, diff);
+			++i;
+			++j;
+
+		}
+   // end day Sunday, max sleeping after meeting on Sunday
+		
+		int sundayLastMin = 24*7*60;
+		int diff = sundayLastMin - endTimings[endTimings.length-1];
+		maxSleepingTime = Math.max(maxSleepingTime, diff);
+		
+		
+		return maxSleepingTime;
+	}
+
+	public static void main(String[] args) {
+
+		String start = "10:05";
+
+		String s1 = start.substring(0, 2);
+		String s2 = start.substring(3, 5);
+
+		int inMinute = Integer.parseInt(s1) * 60 + Integer.parseInt(s2);
+		//System.out.println(s1 + " " + s2 + " " + inMinute);
+		
+		String S= "Mon 01:00-23:00\nTue 01:00-23:00\nWed 01:00-23:00\nThu 01:00-23:00\nFri 01:00-23:00\nSat 01:00-23:00\nSun 01:00-21:00";
+		
+		System.out.println("sleeping time: " +JamesBusinessMan.solution(S));
+
+	}
+
+}
