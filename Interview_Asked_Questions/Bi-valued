@@ -1,0 +1,55 @@
+package com.tus.InterviewAskedQuestions;
+
+public class BiValued {
+	
+	
+	public int solution(int[] A){
+		
+		if(A==null || A.length<1)return -1;
+        int a= A[0];
+        int index=-1;
+        
+        for(int i=1; i<A.length; ++i){
+            
+            if(A[i]!=a){
+                
+                index=i;
+                break;
+            }
+        }
+        
+        if(index==-1)return A.length;
+        
+        int b = A[index];
+        int count = index + 1;
+        int temp = index + 1;
+        
+        for(int i=index+1;i<A.length;++i){
+            
+            if((A[i]!=a) && (A[i]!=b)){
+                
+                a = A[i-1];
+                b = A[i];
+                temp = 2;
+                continue;
+              
+            }
+            
+            else{
+                temp++;
+            }
+           
+          if(temp>count)count=temp;  
+            
+        }
+        
+        return count;
+		
+	}
+
+	public static void main(String[] args) {
+		
+
+	}
+
+}
