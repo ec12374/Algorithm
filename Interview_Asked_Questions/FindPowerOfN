@@ -1,0 +1,34 @@
+package com.tus.InterviewAskedQuestions;
+
+public class FindPowerOfN {
+
+	public static int power(int k, int n) {
+
+		int result = 1;
+		for (int i = 1; i <= n; ++i) {
+
+			result = result * k;
+
+		}
+
+		return result;
+	}
+
+	// using recursion
+
+	public static int powerRecursion(int k, int n) {
+		
+		if(k<=0)return 0;
+		if (n < 1)
+			return 1;
+
+		return k * powerRecursion(k, n - 1);
+	}
+
+	public static void main(String[] args) {
+
+		System.out.println(FindPowerOfN.powerRecursion(0, 0));
+
+	}
+
+}
