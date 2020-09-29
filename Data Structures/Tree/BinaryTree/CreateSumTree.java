@@ -86,6 +86,24 @@ public class CreateSumTree {
 
 		return isSumNode;
 	}
+	
+	// using recursion
+	public boolean isSumTreeRecursion(TreeNode root) {
+
+		if (root.left == null && root.right == null)
+			return true;
+
+		int leftNode = (root.left == null ? 0 : root.left.data);
+		int righNode = (root.right == null ? 0 : root.right.data);
+
+		if (root.data == leftNode + righNode && isSumTreeRecursion(root.left) && isSumTreeRecursion(root.right)) {
+
+			return true;
+
+		} else
+			return false;
+
+	}
 
 	public void printTree(TreeNode root) {
 
@@ -127,8 +145,9 @@ public class CreateSumTree {
 		tree.createSumTree(root);
 
 		tree.printTree(root);
-		
-		System.out.println("Given tree is sum tree: " + tree.isSumTree(root));
+
+		System.out.println("Given tree is sum tree using level order: " + tree.isSumTree(root));
+		System.out.println("Given tree is sum tree using recursion: " + tree.isSumTreeRecursion(root));
 
 	}
 
